@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+from sklearn.cluster import DBSCAN
+
+# Load the stock price data from a CSV file
+stock_data = np.loadtxt('stock_price.csv', delimiter=',')
+
+# Extract the time and price columns from the data
+time = stock_data[:,0]
+price = stock_data[:,1]
+
+# Use DBSCAN to identify clusters in the stock price data
+dbscan = DBSCAN()
+dbscan.fit(price)
+
+# Create a scatter plot of the stock price over time, with different colors for each cluster
+plt.scatter(time, price, c=dbscan.labels_)
+plt.xlabel('Time')
+plt.ylabel('Price')
+plt.title('Stock Price over Time')
+plt.show()
